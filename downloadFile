@@ -1,0 +1,16 @@
+            // 调用工具类WordGenerator的createDoc方法生成Word文档
+            file = WordExportUtil.getInstance("exportWordTemplate/groupReport.ftl").createDocFile(dataMap);//ftl即为Word模板  需要以xml保存
+            //下来 其中的数据需要以EL表达式带入
+            fin = new FileInputStream(file);
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/msword");
+            response.addHeader("Content-Disposition", "attachment;filename=report.doc");
+
+            out = response.getOutputStream();
+            byte[] buffer = new byte[512]; // 缓冲区
+            int b = -1;
+            // 通过循环将读入的Word文件的内容输出到浏览器中
+            while ((b = fin.read(buffer)) != -1) {
+                out.write(buffer, 0, b);
+            }
