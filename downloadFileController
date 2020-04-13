@@ -1,6 +1,11 @@
+            dataMap.put("name", "Delta");
+            dataMap.put("img", base64);//将图片文件转成Base64码
+            File f = new File(imgUpload+filename);// 读取
+            if (f.exists()) {
+                f.delete();
+            }
             // 调用工具类WordGenerator的createDoc方法生成Word文档
-            file = WordExportUtil.getInstance("exportWordTemplate/groupReport.ftl").createDocFile(dataMap);//ftl即为Word模板  需要以xml保存
-            //下来 其中的数据需要以EL表达式带入
+            file = WordExportUtil.getInstance("exportWordTemplate/groupReport.ftl").createDocFile(dataMap);
             fin = new FileInputStream(file);
 
             response.setCharacterEncoding("utf-8");
